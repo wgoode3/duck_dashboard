@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Form goes here</h1>
+    <form action="/duck" method="post">
+        <p>Name: <input type="text" name="name"></p>
+        <p>
+            Gender:
+            <select name="gender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </p>
+        <p>Age: <input type="number" name="age" min="0"></p>
+        <p>Favorite pond: <input type="text" name="favpond"></p>
+        <input type="submit" value="Create a duck">
+    </form>
+
+    <hr>
+
+    <table border=1>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Favorite Pond</th>
+        </tr>
+        <% for(let duck of ducks) { %>
+            <tr>
+                <td><%= duck.name %></td>
+                <td><%= duck.gender %></td>
+                <td><%= duck.age %></td>
+                <td><%= duck.favpond %></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

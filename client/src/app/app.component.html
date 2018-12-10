@@ -1,0 +1,16 @@
+<h1>{{ title }}</h1>
+
+<fieldset>
+    <legend>Make a duck</legend>
+    <form (submit)="makeDuck()">
+        <input type="text" name="newDuck.name" [(ngModel)]="newDuck.name" placeholder="name" />
+        <input type="number" name="newDuck.age" [(ngModel)]="newDuck.age" />
+        <input type="text" name="newDuck.gender" [(ngModel)]="newDuck.gender" placeholder="gender" />
+        <input type="text" name="newDuck.favpond" [(ngModel)]="newDuck.favpond" placeholder="pond" />
+        <input type="submit" value="Make a duck" />
+    </form>
+</fieldset>
+
+<!-- <button (click)="alsoGetDucks()">Get me some ducks</button> -->
+
+<app-duck *ngFor="let duck of ducks" [duck]="duck" (duckEvent)="duckRemoval()"></app-duck>

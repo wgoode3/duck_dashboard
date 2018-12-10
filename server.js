@@ -5,34 +5,12 @@ const express = require("express"),
           app = express(),
          port = 8000;
 
-app.use(bp.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, './static')));
-app.set('views', path.join(__dirname, './views'));
-app.set('view engine', 'ejs');
+app.use(bp.json());
+app.use(express.static(path.join(__dirname, './client/dist/client/')));
 mongoose.connect('mongodb://localhost/ducks');
 
-var DuckSchema = new mongoose.Schema({
-    name: String,
-    gender: String,
-    age: Number,
-    favpond: String
-   })
-mongoose.model('Duck', DuckSchema); 
-var Duck = mongoose.model('Duck') 
-
-app.get("/", function(req, res){
-    Duck.find({}, function(err, ducks){
-        res.render("index.ejs", {ducks: ducks})
-    })
-});
-
-app.post("/duck", function(req, res){
-    let duck = new Duck(req.body);
-    duck.save(function(err){
-        console.log(err);
-        res.redirect("/");
-    });
-});
+require("./server/config/mongoose");
+require("./server/config/routes")(app);
 
 app.listen(port, function() {
     console.log(`listening on port ${port}`);
